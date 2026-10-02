@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'profile_card.dart';
 
 void main() => runApp(const MyApp());
@@ -7,76 +6,32 @@ void main() => runApp(const MyApp());
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  final String nimPraktikan = '20240801200';
-  final String namaPraktikan = 'Muhammad Naufal Fadhilah';
-  final String hobiPraktikan = 'Game';
-
   @override
   Widget build(BuildContext context) {
-    // Digit terakhir NIM 20240801218 adalah 8 (Genap) -> Colors.amber[100]
-    final int digitTerakhir = int.parse(nimPraktikan[nimPraktikan.length - 1]);
-    final bool isGanjil = digitTerakhir % 2 != 0;
-
-    final Color backgroundColor = isGanjil
-        ? (Colors.tealAccent[100] ?? Colors.tealAccent)
-        : (Colors.amber[100] ?? Colors.amber);
-
     return MaterialApp(
       title: 'Tugas Layout Flutter',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        scaffoldBackgroundColor: backgroundColor,
-        useMaterial3: true,
+        // Digit terakhir NIM 20240801200 adalah 0 (Genap)
+        scaffoldBackgroundColor: Colors.amber[100],
       ),
-      home: HomePage(
-        nim: nimPraktikan,
-        nama: namaPraktikan,
-        hobi: hobiPraktikan,
-        bgColor: backgroundColor,
-      ),
+      home: const HomePage(),
     );
   }
 }
 
 class HomePage extends StatelessWidget {
-  final String nim;
-  final String nama;
-  final String hobi;
-  final Color bgColor;
-
-  const HomePage({
-    super.key,
-    required this.nim,
-    required this.nama,
-    required this.hobi,
-    required this.bgColor,
-  });
+  const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // Formula Skor Aktivitas: 
-    final int duaDigitTerakhir = int.parse(nim.substring(nim.length - 2));
-    final int hitungSkorAktivitas = duaDigitTerakhir + 50;
-
-    return Scaffold(
-      backgroundColor: bgColor,
-      appBar: AppBar(
-        title: const Text('Profil Praktikan'),
-        centerTitle: true,
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-      ),
+    return const Scaffold(
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            ProfileCard(
-              nama: nama,
-              nim: nim,
-              hobi: hobi,
-              skorAktivitas: hitungSkorAktivitas,
-            ),
-          ],
+        child: ProfileCard(
+          nama: 'Muhammad Naufal Fadhilah',
+          nim: '20240801200',
+          hobi: 'Main Game',
+          skorAktivitas: 50, // Hasil rumus: 00 + 50
         ),
       ),
     );
